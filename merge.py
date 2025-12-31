@@ -6,7 +6,7 @@ import csv
 tables_dir = Path("tables")
 merged = []
 
-for input_path in tables_dir.glob("*_output.csv"):
+for input_path in tables_dir.glob("*.csv"):
     try:
         with input_path.open(encoding="utf-8") as f:
             reader = csv.reader(f)
@@ -18,11 +18,12 @@ for input_path in tables_dir.glob("*_output.csv"):
 
     except Exception as e:
         print(f"SKIPPED: {input_path.name} -> {e}")
+        
 
 
 # write merged file
 # write merged file inside tables/
-out_file = tables_dir / "merged_output.csv"
+out_file = tables_dir / "merged.csv"
 
 with out_file.open("w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)

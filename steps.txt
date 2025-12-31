@@ -1,0 +1,4 @@
+1. organize_pdfreaders.py
+2. statistiki_fix.py 
+3. merge.py 
+4. createDiagrams.py

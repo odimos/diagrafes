@@ -1,6 +1,6 @@
 from pathlib import Path
 
-file_path = Path("STATISTIKI_output.csv")  # change if needed
+file_path = Path("tables/STATISTIKI.csv")  # change if needed
 
 lines = file_path.read_text(encoding="utf-8").splitlines()
 

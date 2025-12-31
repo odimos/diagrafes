@@ -1,8 +1,11 @@
+import re
 import pdfplumber
 import sys
 from pathlib import Path
 
 TARGET_COL = 3  # 4th column (0-based)
+
+ONLY_NUM_DASH = re.compile(r"^[0-9-]+$")
 
 def extract_third_column(pdf_path, output_txt):
     out_lines = []
@@ -19,7 +22,9 @@ def extract_third_column(pdf_path, output_txt):
                         continue
 
                     val = (row[TARGET_COL] or "").strip()
-                    if val:
+
+                    # keep only values containing digits and "-"
+                    if val and ONLY_NUM_DASH.fullmatch(val):
                         out_lines.append(val)
 
     Path(output_txt).write_text("\n".join(out_lines), encoding="utf-8")

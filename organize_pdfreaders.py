@@ -5,23 +5,17 @@ from pathlib import Path
 
 from pdfreader import extract_third_column
 
-pdfs = [
-    "PLIROFORIKI.pdf",
-    "STATISTIKI.pdf",
-    "DET.pdf",
-    "DEOS.pdf",
-    "LOXRI.pdf",
-    "MARKETING.pdf",
-    "OIKONOMIKIS_EPISTIMIS.pdf",   
-    "ODE.pdf"
-]
 
 out_dir = Path("tables")
 out_dir.mkdir(exist_ok=True)
 
-for pdf in pdfs:
-    input_path = Path(pdf)
+pdfs_dir = Path("pdfs")
 
-    if input_path.exists():
-        output_path = out_dir / f"{input_path.stem}_output.csv"
+for input_path in pdfs_dir.glob("*.pdf"):
+    print("Processing:", input_path)
+    try:
+        output_path = out_dir / f"{input_path.stem}.csv"
         extract_third_column(str(input_path), str(output_path))
+    except Exception as e:
+        print("Failed to create .csv for", input_path, "due to", e)
+
